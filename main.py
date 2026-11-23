@@ -3,6 +3,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired, Length, Email
 from wtforms.widgets import TextArea
+from flask_bootstrap import Bootstrap5
 
 '''
 Red underlines? Install the required packages first: 
@@ -23,6 +24,8 @@ class LoginForm(FlaskForm):
     submit = SubmitField(label='Login')
 
 app = Flask(__name__)
+bootstrap = Bootstrap5(app)
+
 app.secret_key = 'supersecretkey'
 
 

@@ -1,46 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Contact</title>
-</head>
-<body>
-    <form method="POST" action="{{ url_for('contact') }}" novalidate>
-        {{ form.csrf_token }}
+{% extends "base.html" %}
+{% block title %}Contact{% endblock %}
 
-        <p>
-            {{ form.name.label }}: {{ form.name() }}
-            {% if form.name.errors %}
-                {% for error in form.name.errors %}
-                    <span style="color: red">{{ error }}</span>
-                {% endfor %}
-            {% endif %}
-        </p>
-        <p>
-            {{ form.email.label }}: {{ form.email() }}
-            {% if form.email.errors %}
-                {% for error in form.email.errors %}
-                    <span style="color: red">{{ error }}</span>
-                {% endfor %}
-            {% endif %}
-        </p>
-        <p>
-            {{ form.phone.label }}: {{ form.phone() }}
-            {% if form.phone.errors %}
-                {% for error in form.phone.errors %}
-                    <span style="color: red">{{ error }}</span>
-                {% endfor %}
-            {% endif %}
-        </p>
-        <p>
-            {{ form.message.label }}: {{ form.message() }}
-            {% if form.message.errors %}
-                {% for error in form.message.errors %}
-                    <span style="color: red">{{ error }}</span>
-                {% endfor %}
-            {% endif %}
-        </p>
-        {{ form.submit }}
-    </form>
-</body>
-</html>
+{% from 'bootstrap5/form.html' import render_form %}
+
+{% block content %}
+
+<!--    <form method="POST" action="{{ url_for('contact') }}" novalidate>-->
+<!--        {{ form.csrf_token }}-->
+
+<!--        <p>-->
+<!--            {{ form.name.label }}: {{ form.name() }}-->
+<!--            {% if form.name.errors %}-->
+<!--                {% for error in form.name.errors %}-->
+<!--                    <span style="color: red">{{ error }}</span>-->
+<!--                {% endfor %}-->
+<!--            {% endif %}-->
+<!--        </p>-->
+<!--        <p>-->
+<!--            {{ form.email.label }}: {{ form.email() }}-->
+<!--            {% if form.email.errors %}-->
+<!--                {% for error in form.email.errors %}-->
+<!--                    <span style="color: red">{{ error }}</span>-->
+<!--                {% endfor %}-->
+<!--            {% endif %}-->
+<!--        </p>-->
+<!--        <p>-->
+<!--            {{ form.phone.label }}: {{ form.phone() }}-->
+<!--            {% if form.phone.errors %}-->
+<!--                {% for error in form.phone.errors %}-->
+<!--                    <span style="color: red">{{ error }}</span>-->
+<!--                {% endfor %}-->
+<!--            {% endif %}-->
+<!--        </p>-->
+<!--        <p>-->
+<!--            {{ form.message.label }}: {{ form.message() }}-->
+<!--            {% if form.message.errors %}-->
+<!--                {% for error in form.message.errors %}-->
+<!--                    <span style="color: red">{{ error }}</span>-->
+<!--                {% endfor %}-->
+<!--            {% endif %}-->
+<!--        </p>-->
+<!--        {{ form.submit }}-->
+<!--    </form>-->
+
+    {{ render_form(form, novalidate=True) }}
+
+{% endblock %}
