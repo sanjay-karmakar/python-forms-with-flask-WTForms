@@ -1,7 +1,8 @@
 from flask import Flask, render_template
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
-from wtforms.validators import DataRequired, Email, Length
+from wtforms import StringField, PasswordField, SubmitField, TextAreaField
+from wtforms.validators import DataRequired, Length, Email
+from wtforms.widgets import TextArea
 
 '''
 Red underlines? Install the required packages first: 
@@ -42,6 +43,24 @@ def login():
             return render_template("denied.html")
 
     return render_template('login.html', form=login_form)
+
+
+
+class ContactForm(FlaskForm):
+    name = StringField(label='Name', validators=[DataRequired(), Length(min=2, max=20)])
+    email = StringField(label='Email', validators=[DataRequired(), Email()])
+    phone = StringField(label='Phone', validators=[DataRequired()])
+    message = TextAreaField(label='Message', validators=[DataRequired()])
+    submit = SubmitField(label='Submit')
+
+@app.route("/contact", methods=['GET', 'POST'])
+def contact():
+    contact_form = ContactForm()
+    if contact_form.validate_on_submit():
+        print(f"Name: {contact_form.name.data}, Email: {contact_form.email.data}, Phone: {contact_form.phone.data}, Message: {contact_form.message.data}")
+
+    return render_template("contact.html", form=contact_form)
+
 
 
 if __name__ == '__main__':
