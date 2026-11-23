@@ -58,6 +58,9 @@ def contact():
     contact_form = ContactForm()
     if contact_form.validate_on_submit():
         print(f"Name: {contact_form.name.data}, Email: {contact_form.email.data}, Phone: {contact_form.phone.data}, Message: {contact_form.message.data}")
+        return render_template("success.html")
+    else:
+        return render_template("denied.html")
 
     return render_template("contact.html", form=contact_form)
 
